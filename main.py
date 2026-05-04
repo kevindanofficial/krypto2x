@@ -17,7 +17,7 @@ from telegram.ext import (
 # CONFIGURATION (EDIT THESE)
 # ==========================================
 USDT_ADDRESS = "TNeruWPC3x3iavsFcLggjawwnfPLhiPq83"
-EXPECTED_AMOUNT = 10.50
+EXPECTED_AMOUNT = $5 - $1000
 
 # Define conversation states
 SHOW_ADDRESS, WAIT_FOR_TXID = range(2)
@@ -104,6 +104,7 @@ async def verify_txid(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int
     else:
         await wait_msg.edit_text(
             "❌ Payment not found or invalid TxID. Make sure the transaction is complete and you pasted the correct TRC20 Hash.\n\n"
+            "Contact to our Support Team at @krypto2x. \n\n"
             "Please paste the correct Transaction ID, or type /start to restart."
         )
         return WAIT_FOR_TXID
