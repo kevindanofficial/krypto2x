@@ -16,7 +16,7 @@ from telegram.ext import (
 # ==========================================
 # CONFIGURATION (EDIT THESE)
 # ==========================================
-USDT_ADDRESS = "TYourTronAddressHere..."
+USDT_ADDRESS = "TNeruWPC3x3iavsFcLggjawwnfPLhiPq83"
 EXPECTED_AMOUNT = 10.50
 
 # Define conversation states
@@ -28,7 +28,7 @@ SHOW_ADDRESS, WAIT_FOR_TXID = range(2)
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     """Step 1: Explain the rules."""
     rules_text = (
-        "Welcome! 🚀\n\n"
+        "Welcome to Krypto 2X 🚀\n\n"
         "Here are the rules:\n"
         "1. You will receive [Insert Digital Good/Service].\n"
         "2. Payments are strictly in USDT (TRC20).\n"
