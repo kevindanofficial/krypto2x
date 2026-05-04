@@ -17,7 +17,7 @@ from telegram.ext import (
 # CONFIGURATION (EDIT THESE)
 # ==========================================
 USDT_ADDRESS = "TNeruWPC3x3iavsFcLggjawwnfPLhiPq83"
-EXPECTED_AMOUNT = $5 - $1000
+
 
 # Define conversation states
 SHOW_ADDRESS, WAIT_FOR_TXID = range(2)
@@ -74,7 +74,7 @@ async def show_address(update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
     
     # Updated to single asterisks for Telegram Markdown compatibility
     msg = (
-        f"Please send exactly *{EXPECTED_AMOUNT} USDT (TRC20)* to this address:\n\n"
+        f"Please send between *$5 - $1000 USDT (TRC20)* to this address:\n\n"
         f"`{USDT_ADDRESS}`\n\n"
         "Once you have sent the payment, please *paste your Transaction ID (TxHash)* below so I can verify it."
     )
