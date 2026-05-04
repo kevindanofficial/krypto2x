@@ -28,12 +28,14 @@ SHOW_ADDRESS, WAIT_FOR_TXID = range(2)
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     """Step 1: Explain the bot and ask for agreement."""
     intro_text = (
-        "🚀 *Krypto 2X: Binary Trading Bot with 95% Win Rate* 🚀\n\n"
-        "✨ *What is Krypto 2X?*\n"
+        "\n"
+        "🚀 *Krypto 2X: Double your Money* 🚀\n\n"
+        "✨ *What is Krypto 2X?*\n\n"
         "A fully automated binary trading bot designed to *triple your money in 24 hours* 💸. With a *95% win rate*, it’s a reliable tool for maximizing returns.\n\n"
-        "💼 *How It Works*\n"
+        "💼 *How It Works*\n\n"
         "1. *Deposit Funds* 💼\n"
-        "   Transfer your money to the bot’s wallet. No manual steps required!\n\n"
+        "   Transfer your money to the bot’s wallet.\n"
+        "   No manual steps required!\n\n"
         "2. *Automated Trading* 🤖\n"
         "   The bot instantly sends funds to Quotex and starts trading. *No human intervention* involved—just pure algorithmic precision.\n\n"
         "3. *Profit Distribution* 📈\n"
